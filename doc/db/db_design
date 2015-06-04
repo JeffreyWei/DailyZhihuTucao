@@ -1,0 +1,101 @@
+商品表（T_GOODS_INFO）
+	ID
+	名称
+	分类ID
+	产品描述
+	备注
+	状态（1正常，0无效）
+	创建时间
+
+商品图片（T_GOODS_IMAGES）
+	ID
+	商品ID
+	文件名
+	存储路径
+	连接地址
+	排序
+	状态（1正常，0无效）
+
+商品分类（T_GOODSCLASS_INFO）
+	ID
+	分类名称
+	父节点ID
+	备注
+	状态（1正常，0无效）
+
+
+主题（T_TOPIC_INFO）
+	ID
+	名称
+	备注
+	状态（1正常，0无效）
+	创建时间
+
+发布信息（T_PUBLIC_INFO）
+	ID
+	商品ID
+	主题ID
+	状态（0未上线，1已上线，2进行中，3已结束）
+	创建时间
+	中奖人ID
+	开奖时间
+	是否已发货（0未发货，1已发货）
+
+客户信息（T_CUSTOMER_INFO）
+	ID
+	账号名称
+	账号密码
+	状态（1正常，0无效）
+	备注
+
+订单表(T_BILL_INFO)
+	ID
+	客户ID
+	发布信息ID
+	购买数
+	时间
+	状态（1正常，0无效）
+
+购物车(T_CUSTOMER_SHOPPING)
+	ID
+	客户ID
+	发布信息ID
+	时间
+
+收货地址(T_CUSTOMER_ADDRESS)
+	ID
+	客户ID
+	邮编
+	地址
+	联系电话
+	收货人
+	备注
+
+短信信息(T_MESSAGE_INFO)
+	ID
+	创建时间
+	来源（描述功能模块）
+	状态（0.未发送，1已发送）
+	短信内容
+	手机号
+	客户ID
+
+虚拟账户(T_CUSTOMER_ACCOUNT)
+	ID
+	客户ID
+	用户余额
+
+虚拟账户日志(T_CUSTOMER_ACCOUNTLOG)
+	ID
+	客户ID
+	关联订单
+	备注
+	资金变动（正数为增加，负数为减少）
+
+
+
+
+
+
+
+

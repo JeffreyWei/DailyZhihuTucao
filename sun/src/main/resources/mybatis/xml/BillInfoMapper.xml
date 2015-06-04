@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.babibeng.shimao.sun.dao.BillInfoMapper">
+  <resultMap id="BaseResultMap" type="com.babibeng.shimao.sun.model.BillInfo">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="customerid" jdbcType="INTEGER" property="customerid" />
+    <result column="publicid" jdbcType="INTEGER" property="publicid" />
+    <result column="paycount" jdbcType="INTEGER" property="paycount" />
+    <result column="paytime" jdbcType="TIMESTAMP" property="paytime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+</mapper>

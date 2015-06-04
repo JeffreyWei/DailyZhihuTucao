@@ -5,7 +5,6 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <!-- 数据源 -->
     <!--see https://github.com/alibaba/druid/wiki/%E9%85%8D%E7%BD%AE_DruidDataSource%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
@@ -50,12 +49,35 @@
 
     <!-- Spring提供的myBatis的SqlMap配置 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="configLocation" value="classpath:mybatis-config.xml" />
+        <!--<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="mapperLocations" value="classpath:mybatis/xml/*.xml"/>-->
         <property name="dataSource" ref="dataSource"/>
-        <property name="mapperLocations" value="classpath:mybatis/*.xml"/>
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:mybatis/xml/*.xml</value>
+            </array>
+        </property>
+        <property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageHelper">
+
+                </bean>
+                <bean class="com.github.abel533.mapperhelper.MapperInterceptor">
+                    <property name="properties">
+                        <value>
+                            mappers=com.github.abel533.mapper.Mapper
+                            IDENTITY=MYSQL
+                            notEmpty=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
-    <!--mybatis dao/mapper 映射-->
+    <!--mybatis dao/xml 映射-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.founder.auction.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
@@ -81,7 +103,7 @@
     </tx:advice>
     <aop:config>
         <aop:pointcut id="servicePointcut"
-                      expression="execution(* com.founder.auction.service.impl..*.*(..))"/>
+                      expression="execution(* com.babibeng.shimao.sun.service.impl..*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut"/>
     </aop:config>
 
@@ -93,8 +115,8 @@
           scope="prototype">
         <property name="patterns">
             <list>
-                <value>com.founder.auction.service.*</value>
-                <value>com.founder.auction.dao.*</value>
+                <value>com.babibeng.shimao.sun.service.*</value>
+                <value>com.babibeng.shimao.sun.dao.*</value>
             </list>
         </property>
     </bean>
