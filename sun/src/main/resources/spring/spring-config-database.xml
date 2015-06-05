@@ -35,6 +35,7 @@
         <property name="maxPoolPreparedStatementPerConnectionSize"
                   value="${druid.maxPoolPreparedStatementPerConnectionSize}"/>
 
+        <!--防止连接泄露-->
         <!-- 打开removeAbandoned功能 -->
         <property name="removeAbandoned" value="true"/>
         <!-- 1800秒，也就是30分钟 -->
@@ -49,20 +50,22 @@
 
     <!-- Spring提供的myBatis的SqlMap配置 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-        <!--<property name="mapperLocations" value="classpath:mybatis/xml/*.xml"/>-->
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations">
             <array>
-                <value>classpath:mybatis/xml/*.xml</value>
+                <value>classpath:mybatis/*.xml</value>
             </array>
         </property>
         <property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageHelper">
-
+                    <property name="properties">
+                        <value>
+                            dialect=hsqldb
+                            reasonable=true
+                        </value>
+                    </property>
                 </bean>
                 <bean class="com.github.abel533.mapperhelper.MapperInterceptor">
                     <property name="properties">
@@ -76,17 +79,16 @@
             </array>
         </property>
     </bean>
-
     <!--mybatis dao/xml 映射-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.founder.auction.dao"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.babibeng.shimao.sun.dao,com.github.abel533.entity.mapper"/>
     </bean>
 
     <!--事务管理器配置-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+
     <!-- 配置事务的传播特性  -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -120,7 +122,7 @@
             </list>
         </property>
     </bean>
-    <aop:config >
+    <aop:config>
         <aop:advisor advice-ref="druid-stat-interceptor"
                      pointcut-ref="druid-stat-pointcut"/>
     </aop:config>

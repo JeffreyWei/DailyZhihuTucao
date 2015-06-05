@@ -43,38 +43,27 @@
         <!--</table>-->
 
         <table tableName="t_bill_info" domainObjectName="BillInfo">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
 
         <table tableName="t_class_info" domainObjectName="ClassInfo">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_customer_account" domainObjectName="CustomerAccount">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_customer_accountlog" domainObjectName="CustomerAccountLog">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_customer_address" domainObjectName="CustomerAddress">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_customer_info" domainObjectName="CustomerInfo">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_customer_shoppingcart" domainObjectName="CustomerShoppingCart">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_goods_images" domainObjectName="GoodsImages">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_message_info" domainObjectName="MessageInfo">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_public_info" domainObjectName="PublicInfo">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
         <table tableName="t_topic_info" domainObjectName="TopicInfo">
-            <generatedKey column="id" sqlStatement="Mysql"/>
         </table>
 
     </context>

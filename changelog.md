@@ -30,3 +30,12 @@
 * mybatis generator生成代码
 * 完成spring-mvc整合
 * 计划任务整合
+
+**20150605**
+* spring mvc定义转换器错误
+* 日志输出
+* service
+* 事务测试
+* druid配置
+jrebel集成
+

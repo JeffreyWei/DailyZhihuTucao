@@ -10,5 +10,5 @@
                                           com.babibeng.shimao.sun.dao,
                                           com.babibeng.shimao.sun.service "/>
     <!--DataBase config-->
-    <!--<import resource="classpath:spring/spring-config-database.xml"/>-->
+    <import resource="classpath:spring/spring-config-database.xml"/>
 </beans>

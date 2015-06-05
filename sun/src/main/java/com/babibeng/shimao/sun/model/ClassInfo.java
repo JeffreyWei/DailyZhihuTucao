@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Table(name = "t_class_info")
 public class ClassInfo {
     @Id
-    @SequenceGenerator(name="",sequenceName="SELECT LAST_INSERT_ID()")
     private Integer id;
 
     /**
