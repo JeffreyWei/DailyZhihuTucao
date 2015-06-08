@@ -9,6 +9,12 @@
     <context:component-scan base-package="com.babibeng.shimao.sun.model,
                                           com.babibeng.shimao.sun.dao,
                                           com.babibeng.shimao.sun.service "/>
+
+    <bean class="com.babibeng.shimao.sun.util.WeChartConfig">
+        <property name="appID" value="${weixin.appID}"/>
+        <property name="appsecret" value="${weixin.appsecret}"/>
+    </bean>
+    
     <!--DataBase config-->
     <import resource="classpath:spring/spring-config-database.xml"/>
 </beans>
