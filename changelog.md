@@ -37,5 +37,7 @@
 * service
 * 事务测试
 * druid配置
-jrebel集成
+* jrebel集成
 
+**20150606**
+* 微信接入

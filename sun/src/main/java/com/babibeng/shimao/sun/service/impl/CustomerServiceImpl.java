@@ -23,6 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
         Example example = new Example(CustomerInfo.class);
         example.createCriteria();
         List<CustomerInfo> customerInfoList = mapper.selectByExample(example);
+        System.out.println(customerInfoList.size());
         if (customerInfoList.size() > 0) {
             return customerInfoList.get(0);
         } else {

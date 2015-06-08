@@ -2,7 +2,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
-
 	<!-- spring -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -17,7 +16,7 @@
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
 
-	<!-- 设置servlet编码开始 -->
+	<!-- servlet编码 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>
@@ -37,7 +36,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
-	<!-- 设置servlet编码结束 -->
 	<!--WebStatFilter-->
 	<filter>
 		<filter-name>DruidWebStatFilter</filter-name>
@@ -90,7 +88,7 @@
 
 	<!--spring-mvc-->
 	<servlet>
-		<servlet-name>appServlet</servlet-name>
+		<servlet-name>shimao_webapp</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
@@ -100,10 +98,9 @@
 		<async-supported>true</async-supported>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>appServlet</servlet-name>
+		<servlet-name>shimao_webapp</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
 
 	<!--session timeout-->
 	<session-config>
@@ -119,5 +116,4 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
 </web-app>

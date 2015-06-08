@@ -11,6 +11,12 @@
     <artifactId>com.babibeng.shimao.sun</artifactId>
     <packaging>war</packaging>
     <dependencies>
+        <!--微信-->
+        <dependency>
+            <groupId>com.github.sd4324530</groupId>
+            <artifactId>fastweixin</artifactId>
+            <version>1.3.2</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -29,7 +35,6 @@
             </properties>
         </profile>
     </profiles>
-
     <build>
         <filters>
             <filter>${filter.file}</filter>

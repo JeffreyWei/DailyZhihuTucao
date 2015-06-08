@@ -45,7 +45,6 @@
 
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="${druid.filters}"/>
-
     </bean>
 
     <!-- Spring提供的myBatis的SqlMap配置 -->

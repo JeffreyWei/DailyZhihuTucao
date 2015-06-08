@@ -1,6 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:task="http://www.springframework.org/schema/task"
@@ -12,10 +11,9 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
-
     <!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
     <context:component-scan base-package="com.babibeng.shimao.sun.controller,
-                                          com.babibeng.shimao.sun.schedule" />
+                                          com.babibeng.shimao.sun.schedule"/>
     <task:annotation-driven/>
 
     <!--RequestMappingHandlerAdapter-->
@@ -30,7 +28,9 @@
     <context:component-scan base-package="com.babibeng.shimao.sun.controller"/>
 
     <bean id="stringHttpMessageConverter"
-          class="org.springframework.http.converter.StringHttpMessageConverter"/>
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg value="UTF-8"/>
+    </bean>
 
     <bean id="marshallingHttpMessageConverter"
           class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
@@ -55,7 +55,6 @@
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-
 
     <bean id="contentNegotiationManagerFactoryBean"
           class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
@@ -104,7 +103,7 @@
         </property>
     </bean>
 
-    <!--国际化-->
+    <!--i18n-->
     <bean id="messageSource"
           class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="defaultEncoding" value="UTF-8"/>
@@ -120,20 +119,11 @@
         <property name="maxUploadSize" value="100000"/>
     </bean>
 
-    <!--&lt;!&ndash; Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory &ndash;&gt;-->
-    <!--<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
-          <!--p:order="1">-->
-        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
-        <!--<property name="contentType" value="text/html"/>-->
-        <!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
-        <!--<property name="suffix" value=".jsp"/>-->
-    <!--</bean>-->
-
-    <!-- 类型转换及数据格式化 -->
+    <!-- 类型转换及数据格式化，启动时造成spring-mvc转换数据格式失败，但并不影响使用 -->
     <!--<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>-->
 
+    <!--首页-->
     <mvc:view-controller path="/" view-name="index"/>
-
-    <!-- Imports user-defined @Controller beans that process client requests -->
+    <!--站点图标-->
     <mvc:resources mapping="/favicon.ico" location="resources/favicon.ico"/>
 </beans>
