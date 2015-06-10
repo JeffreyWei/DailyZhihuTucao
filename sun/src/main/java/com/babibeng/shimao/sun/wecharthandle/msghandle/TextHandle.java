@@ -1,4 +1,4 @@
-package com.babibeng.shimao.sun.controller;
+package com.babibeng.shimao.sun.wecharthandle.msghandle;
 
 import com.babibeng.shimao.sun.util.WeChartConfig;
 import com.github.sd4324530.fastweixin.api.MenuAPI;
@@ -8,71 +8,45 @@ import com.github.sd4324530.fastweixin.api.entity.MenuButton;
 import com.github.sd4324530.fastweixin.api.enums.MenuType;
 import com.github.sd4324530.fastweixin.api.enums.ResultType;
 import com.github.sd4324530.fastweixin.api.response.GetMenuResponse;
-import com.github.sd4324530.fastweixin.handle.EventHandle;
 import com.github.sd4324530.fastweixin.handle.MessageHandle;
 import com.github.sd4324530.fastweixin.message.Article;
 import com.github.sd4324530.fastweixin.message.BaseMsg;
 import com.github.sd4324530.fastweixin.message.NewsMsg;
 import com.github.sd4324530.fastweixin.message.TextMsg;
-import com.github.sd4324530.fastweixin.message.req.*;
-import com.github.sd4324530.fastweixin.servlet.WeixinControllerSupport;
+import com.github.sd4324530.fastweixin.message.req.TextReqMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by wei on 15/6/5.
+ * Created by wei on 15/6/9.
  */
-//@RestController
-@RequestMapping("/weixin")
-public class WeixinController extends WeixinControllerSupport {
+@Component
+public class TextHandle implements MessageHandle<TextReqMsg> {
+    private Logger logger = LoggerFactory.getLogger(TextHandle.class);
 
     @Autowired
     private WeChartConfig config;
-    private Logger logger = LoggerFactory.getLogger(WeixinController.class);
-    private String token;
 
     private ApiConfig getConfig() {
         return config.getWeCharApiConfig();
     }
+    private boolean isHandle =true;
 
-    //设置TOKEN，用于绑定微信服务器
     @Override
-    protected String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    //    //使用安全模式时设置：APPID
-//    //不再强制重写，有加密需要时自行重写该方法
-//    @Override
-//    protected String getAppId() {
-//        return "wxded5ba7134d7afc0";
-//    }
-//    //使用安全模式时设置：密钥
-//    //不再强制重写，有加密需要时自行重写该方法
-//    @Override
-//    protected String getAESKey() {
-//        return null;
-//    }
-    //重写父类方法，处理对应的微信消息
-    @Override
-    protected BaseMsg handleTextMsg(TextReqMsg msg) {
+    public BaseMsg handle(TextReqMsg msg) {
         String content = msg.getContent();
         BaseMsg result = null;
         logger.info("用户发送到服务器的内容:{}", content);
         if (content.equals("1")) {
             //图文新闻
             NewsMsg mes = new NewsMsg(new ArrayList<Article>() {{
-                add(new Article("爱哩快看——瘦人的秘密", "瘦人的秘密", "https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=dd74fd8f9e504fc2a20ae34583e0d323/6c224f4a20a44623fbadd4e59d22720e0df3d7d6.jpg", "http://www.baidu.com"));
-                add(new Article("小树快来这有雨", "这里有小鱼", "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=86969735bc014a90816b15fdcf4a0d20/241f95cad1c8a786519662896209c93d71cf50fc.jpg", "http://www.baidu.com"));
+                add(new Article("瑜伽教程", "", "https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=dd74fd8f9e504fc2a20ae34583e0d323/6c224f4a20a44623fbadd4e59d22720e0df3d7d6.jpg", "http://www.baidu.com"));
+                add(new Article("南极漂流", "", "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=86969735bc014a90816b15fdcf4a0d20/241f95cad1c8a786519662896209c93d71cf50fc.jpg", "http://www.baidu.com"));
             }});
             result = mes;
         } else if (content.equals("2")) {
@@ -85,44 +59,13 @@ public class WeixinController extends WeixinControllerSupport {
         } else {
             result = new TextMsg("输入1显示新闻，2创建菜单，3列出现有菜单，输入其他显示菜单！");
         }
+        isHandle =false;
         return result;
     }
 
     @Override
-    protected BaseMsg handleVoiceMsg(VoiceReqMsg msg) {
-
-        return new TextMsg("收到用户的语音信息!");
-    }
-
-    @Override
-    protected BaseMsg handleLocationMsg(LocationReqMsg msg) {
-        logger.info(msg.toString());
-        return handleDefaultMsg(msg);
-    }
-
-    /*1.1版本新增，重写父类方法，加入自定义微信消息处理器
-     *不是必须的，上面的方法是统一处理所有的文本消息，如果业务觉复杂，上面的会显得比较乱
-     *这个机制就是为了应对这种情况，每个MessageHandle就是一个业务，只处理指定的那部分消息
-     */
-    @Override
-    protected List<MessageHandle> initMessageHandles() {
-        List<MessageHandle> handles = new ArrayList<MessageHandle>();
-        //handles.add(new MyMessageHandle());
-        return handles;
-    }
-
-    //1.1版本新增，重写父类方法，加入自定义微信事件处理器，同上
-    @Override
-    protected List<EventHandle> initEventHandles() {
-        List<EventHandle> handles = new ArrayList<EventHandle>();
-        //handles.add(new MyEventHandle());
-        return handles;
-    }
-
-    @Override
-    protected BaseMsg handleMenuClickEvent(MenuEvent event) {
-        logger.info(event.toString());
-        return handleDefaultEvent(event);
+    public boolean beforeHandle(TextReqMsg message) {
+        return isHandle;
     }
 
 
