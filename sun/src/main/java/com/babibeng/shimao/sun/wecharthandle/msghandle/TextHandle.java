@@ -78,25 +78,25 @@ public class TextHandle implements MessageHandle<TextReqMsg> {
         //准备一级主菜单
         MenuButton main1 = new MenuButton();
         main1.setType(MenuType.CLICK);
-        main1.setKey("main1");
-        main1.setName("测试");
+        main1.setKey("next");
+        main1.setName("再来一个:)");
         //准备子菜单
-        MenuButton sub1 = new MenuButton();
-        sub1.setKey("sub1");
-        sub1.setName("授权");
-        sub1.setType(MenuType.VIEW);
-        sub1.setUrl("http://www.baidu.com");
-        MenuButton sub2 = new MenuButton();
-        sub2.setKey("sub2");
-        sub2.setName("点击");
-        sub2.setType(MenuType.CLICK);
-
-
-        List<MenuButton> list = new ArrayList<MenuButton>();
-        list.add(sub1);
-        list.add(sub2);
-        //将子菜单放入主菜单里
-        main1.setSubButton(list);
+//        MenuButton sub1 = new MenuButton();
+//        sub1.setKey("sub1");
+//        sub1.setName("授权");
+//        sub1.setType(MenuType.VIEW);
+//        sub1.setUrl("http://www.baidu.com");
+//        MenuButton sub2 = new MenuButton();
+//        sub2.setKey("sub2");
+//        sub2.setName("点击");
+//        sub2.setType(MenuType.CLICK);
+//
+//
+//        List<MenuButton> list = new ArrayList<MenuButton>();
+//        list.add(sub1);
+//        list.add(sub2);
+//        //将子菜单放入主菜单里
+//        main1.setSubButton(list);
 
         List<MenuButton> mainList = new ArrayList<MenuButton>();
         mainList.add(main1);

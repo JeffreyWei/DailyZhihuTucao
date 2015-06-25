@@ -14,7 +14,7 @@
 
         <!--mysql-connector-java-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/shimao?useUnicode=true&amp;characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/dailyzhihu?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="toor">
         </jdbcConnection>
@@ -37,27 +37,9 @@
         <!--<generatedKey column="id" sqlStatement="Mysql"/>-->
         <!--</table>-->
 
-        <table tableName="t_bill_info" domainObjectName="BillInfo">
+        <table tableName="T_TUCAO_MAIN" domainObjectName="TucaoMain">
         </table>
-        <table tableName="t_class_info" domainObjectName="ClassInfo">
-        </table>
-        <table tableName="t_customer_account" domainObjectName="CustomerAccount">
-        </table>
-        <table tableName="t_customer_accountlog" domainObjectName="CustomerAccountLog">
-        </table>
-        <table tableName="t_customer_address" domainObjectName="CustomerAddress">
-        </table>
-        <table tableName="t_customer_info" domainObjectName="CustomerInfo">
-        </table>
-        <table tableName="t_customer_shoppingcart" domainObjectName="CustomerShoppingCart">
-        </table>
-        <table tableName="t_goods_images" domainObjectName="GoodsImages">
-        </table>
-        <table tableName="t_message_info" domainObjectName="MessageInfo">
-        </table>
-        <table tableName="t_public_info" domainObjectName="PublicInfo">
-        </table>
-        <table tableName="t_topic_info" domainObjectName="TopicInfo">
+        <table tableName="T_TUCAO_DETAIL" domainObjectName="TucaoDetail">
         </table>
     </context>
 </generatorConfiguration>

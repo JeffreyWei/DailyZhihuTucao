@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.babibeng.shimao.sun.dao.TucaoMainMapper" >
+  <resultMap id="BaseResultMap" type="com.babibeng.shimao.sun.model.TucaoMain" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dateid" property="dateid" jdbcType="VARCHAR" />
+    <result column="downloaded" property="downloaded" jdbcType="INTEGER" />
+  </resultMap>
+</mapper>
