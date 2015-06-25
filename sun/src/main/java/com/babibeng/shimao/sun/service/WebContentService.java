@@ -9,5 +9,5 @@ public interface WebContentService {
      * @param dateStr   {dateStr}的数字应为 20131119
      * @return
      */
-    public boolean getDailyZhihuContent(String dateStr);
+    public boolean fetchDailyZhihuContent(String dateStr);
 }

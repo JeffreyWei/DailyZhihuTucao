@@ -37,27 +37,28 @@ public class WebContentServiceImpl implements WebContentService {
     @Autowired
     private TucaoDetailMapper tucaoDetailMapper;
 
-    public static void main(String[] args) {
-        WebContentServiceImpl service = new WebContentServiceImpl();
-        Calendar start = Calendar.getInstance();
-        start.set(2013, 5, 20);
-        Calendar end = Calendar.getInstance();
-        end.set(2015, 6, 23);
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        while(start.compareTo(end) <= 0) {
-            String dateStr=format.format(start.getTime());
-            System.out.println(dateStr+" result:"+service.getDailyZhihuContent(dateStr));
-            //循环，每次天数加1
-            start.set(Calendar.DATE, start.get(Calendar.DATE) + 1);
-        }
-    }
+//    public static void main(String[] args) {
+//        WebContentServiceImpl service = new WebContentServiceImpl();
+//        Calendar start = Calendar.getInstance();
+//        start.set(2013, 5, 20);
+//        Calendar end = Calendar.getInstance();
+//        end.set(2015, 6, 23);
+//        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+//        while(start.compareTo(end) <= 0) {
+//            String dateStr=format.format(start.getTime());
+//            System.out.println(dateStr+" result:"+service.fetchDailyZhihuContent(dateStr));
+//            //循环，每次天数加1
+//            start.set(Calendar.DATE, start.get(Calendar.DATE) + 1);
+//        }
+//    }
 
     /**
+     * 抓取知乎吐槽数据
      * @param dateStr {dateStr}的数字应为 20131119
      * @return
      */
     @Override
-    public boolean getDailyZhihuContent(String dateStr) {
+    public boolean fetchDailyZhihuContent(String dateStr) {
         boolean success = true;
         //防止重复下载，进行重复检查
         Example example = new Example(TucaoMain.class);
@@ -83,8 +84,6 @@ public class WebContentServiceImpl implements WebContentService {
             }
             //解析吐槽帖子，保存信息
             content = getWebBody(APPConfig.DailyZhihu.STORY + tucaoMain.getId());
-
-//             content = getWebBody("http://news-at.zhihu.com/api/4/news/" + storyID.toString());
             JSONObject detail = null;
             try {
                 detail = new JSONObject(content);
@@ -99,7 +98,6 @@ public class WebContentServiceImpl implements WebContentService {
                 int i = 0;
                 for (; i < count; i++) {
                     try {
-
                         //判断content下面是否有img标签
                         if (!elements.get(i).select("img").isEmpty()) {
                             continue;
@@ -110,7 +108,6 @@ public class WebContentServiceImpl implements WebContentService {
                         TucaoDetail tucaoDetail = new TucaoDetail(tucaoMain.getId(), title, comment, link);
                         tucaoDetailMapper.insert(tucaoDetail);
                     } catch (Exception e) {
-
                     }
                 }
                 if (i > 0) {
@@ -127,7 +124,7 @@ public class WebContentServiceImpl implements WebContentService {
         }
         return success;
     }
-
+//    //httpclient方式获取html
 //    private String getWebBody(String URL, int timeout) {
 //        String content = null;
 //        try {
