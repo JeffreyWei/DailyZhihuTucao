@@ -35,23 +35,23 @@ public class DemoController {
 //        customerService.insertCustomer(customerInfo);
 
 
-        Thread t=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Calendar start = Calendar.getInstance();
-                start.set(2013, 5, 20);
-                Calendar end = Calendar.getInstance();
-                end.set(2015, 6, 23);
-                SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-                while(start.compareTo(end) <= 0) {
-                    String dateStr=format.format(end.getTime());
-                    System.out.println(dateStr+" result:"+webContentService.getDailyZhihuContent(dateStr));
-                    //循环，每次天数加1
-                    end.set(Calendar.DATE, end.get(Calendar.DATE) -1);
-                }
-            }
-        });
-        t.start();
+//        Thread t=new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Calendar start = Calendar.getInstance();
+//                start.set(2013, 5, 20);
+//                Calendar end = Calendar.getInstance();
+//                end.set(2015, 6, 23);
+//                SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+//                while(start.compareTo(end) <= 0) {
+//                    String dateStr=format.format(end.getTime());
+//                    System.out.println(dateStr+" result:"+webContentService.fetchDailyZhihuContent(dateStr));
+//                    //循环，每次天数加1
+//                    end.set(Calendar.DATE, end.get(Calendar.DATE) -1);
+//                }
+//            }
+//        });
+//        t.start();
         return "index";
     }
 }

@@ -37,21 +37,6 @@ public class WebContentServiceImpl implements WebContentService {
     @Autowired
     private TucaoDetailMapper tucaoDetailMapper;
 
-//    public static void main(String[] args) {
-//        WebContentServiceImpl service = new WebContentServiceImpl();
-//        Calendar start = Calendar.getInstance();
-//        start.set(2013, 5, 20);
-//        Calendar end = Calendar.getInstance();
-//        end.set(2015, 6, 23);
-//        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-//        while(start.compareTo(end) <= 0) {
-//            String dateStr=format.format(start.getTime());
-//            System.out.println(dateStr+" result:"+service.fetchDailyZhihuContent(dateStr));
-//            //循环，每次天数加1
-//            start.set(Calendar.DATE, start.get(Calendar.DATE) + 1);
-//        }
-//    }
-
     /**
      * 抓取知乎吐槽数据
      * @param dateStr {dateStr}的数字应为 20131119
@@ -124,39 +109,4 @@ public class WebContentServiceImpl implements WebContentService {
         }
         return success;
     }
-//    //httpclient方式获取html
-//    private String getWebBody(String URL, int timeout) {
-//        String content = null;
-//        try {
-//            HttpClient httpClient = new HttpClient();
-//            GetMethod method = new GetMethod(URL);
-//            httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(timeout);
-//            httpClient.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
-//
-//            method.getParams().setCookiePolicy(CookiePolicy.BROWSER_COMPATIBILITY);
-//            method.setRequestHeader("User-Agent", "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)");
-//            method.addRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-//            Document doc = null;
-//            try {
-//                httpClient.executeMethod(method);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            if (method.getStatusCode() == HttpStatus.SC_OK) {
-//                try {
-//                    doc = Jsoup.parse(method.getResponseBodyAsString());
-//                } catch (IOException e) {
-//                }
-//            }
-//            content = StringEscapeUtils.unescapeHtml(doc.body().html());
-//
-//        } catch (Exception e) {
-//
-//        }
-//        return content;
-//    }
-//
-//    private String getWebBody(String URL) {
-//        return getWebBody(URL, 3000);
-//    }
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by wei on 15/6/4.
  */
-@Component
+@Service
 public class DemoTask {
 //    @Scheduled(cron = "0/2 * * * * *")
     public void execute() {
